@@ -12,7 +12,30 @@ android {
         versionName "1.0"
     }
 
+    flavorDimensions "bundle", "api"
+    productFlavors {
+        basic {
+            dimension "bundle"
+        }
+        minapi16 {
+            dimension "api"
+            minSdkVersion 16
+        }
+        minapi21 {
+            dimension "api"
+            minSdkVersion 21
+        }
+        androidTV {
+            dimension "api"
+            minSdkVersion 21
+        }
+        fireTV {
+            dimension "api"
+            minSdkVersion 21
+        }
+    }
 }
 
 dependencies {
+    basicImplementation 'com.google.code.gson:gson:2.8.2'
 }
