@@ -1,17 +1,19 @@
 apply plugin: 'com.android.application'
+apply plugin: 'maven-publish'
 
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.theoplayer.android"
+        applicationId project.ext.groupId
         minSdkVersion 16
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
     }
 
+    // Note the order of the flavors are important in generating the publishing artifacts
     flavorDimensions "bundle", "api"
     productFlavors {
         basic {
@@ -38,4 +40,65 @@ android {
 
 dependencies {
     basicImplementation 'com.google.code.gson:gson:2.8.2'
+}
+
+task updateProperties() {
+    def groupId = project.ext.groupId
+    def sdkName = project.ext.sdkName
+    def sdkVersion = project.ext.sdkVersion
+    ant.replaceregexp(file: '../gradle.properties', match: 'groupId=.*', replace: "groupId=$groupId", flags: 'g', byline: true)
+    ant.replaceregexp(file: '../gradle.properties', match: 'sdkName=.*', replace: "sdkName=$sdkName", flags: 'g', byline: true)
+    ant.replaceregexp(file: '../gradle.properties', match: 'sdkVersion=.*', replace: "sdkVersion=$sdkVersion", flags: 'g', byline: true)
+}
+
+publishing {
+    publications {
+        group project.ext.groupId
+        version project.ext.sdkVersion
+
+        // Create different publications for every flavor
+        android.variantFilter { variant ->
+            if (variant.buildType.name == "release") {
+
+                // Dynamically creating publications name
+                "${variant.name}"(MavenPublication) {
+                    // The reason why the order of the flavors are important in generating the publishing artifacts
+                    def bundleFlavor = variant.flavors.name[0]
+                    def apiFlavor = variant.flavors.name[1]
+                    artifactId "${bundleFlavor}-${apiFlavor}"
+                    artifact("libs/${project.ext.sdkName}-${bundleFlavor}-${project.ext.sdkVersion}-${apiFlavor}-release.aar")
+
+                    pom.withXml {
+                        def configurationName = "${bundleFlavor}Implementation"
+
+                        //Creating additional node for dependencies
+                        def dependenciesNode = asNode().appendNode('dependencies')
+
+                        //Iterate over the {configurationName} dependencies, adding a <dependency> node for each
+                        configurations[configurationName].allDependencies.each {
+                            if (it.group != null && it.name != null) {
+                                println "${configurationName} - adding dependency: ${it.group}:${it.name}:${it.version}"
+
+                                def dependencyNode = dependenciesNode.appendNode('dependency')
+                                dependencyNode.appendNode('groupId', it.group)
+                                dependencyNode.appendNode('artifactId', it.name)
+                                dependencyNode.appendNode('version', it.version)
+
+                                //If there are any exclusions in dependency
+                                if (it.excludeRules.size() > 0) {
+                                    def exclusionsNode = dependencyNode.appendNode('exclusions')
+                                    it.excludeRules.each { rule ->
+                                        def exclusionNode = exclusionsNode.appendNode('exclusion')
+                                        exclusionNode.appendNode('groupId', rule.group)
+                                        exclusionNode.appendNode('artifactId', rule.module)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+    }
 }
