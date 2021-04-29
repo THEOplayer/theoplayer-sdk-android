@@ -14,7 +14,7 @@ You must use this license string when setting up THEOplayer.
 
 ## Included features
 
-The THEOplayer SDK consists of modular features. This package includes only the basic features: DASH, HLS, LL-HLS and UI.
+The THEOplayer SDK consists of modular features. This package includes only the basic features: DASH, HLS, LL-HLS, UI, Cache, ExoPlayer.
 Additional feature sets will be provided in the future.
 
 Alternatively, you can make your own custom build via our [THEOportal](https://portal.theoplayer.com),
