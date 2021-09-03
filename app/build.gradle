@@ -73,15 +73,18 @@ publishing {
                     artifact("libs/${project.ext.sdkName}-${bundleFlavor}-${project.ext.sdkVersion}-${apiFlavor}-release.aar")
 
                     pom.withXml {
-                        def configurationName = "${bundleFlavor}Implementation"
+                        def bundleConfigurationName = "${bundleFlavor}Implementation"
+                        def apiConfigurationName = "${apiFlavor}Implementation"
+                        def dependencies = configurations[bundleConfigurationName].allDependencies +
+                                configurations[apiConfigurationName].allDependencies;
 
                         //Creating additional node for dependencies
                         def dependenciesNode = asNode().appendNode('dependencies')
 
                         //Iterate over the {configurationName} dependencies, adding a <dependency> node for each
-                        configurations[configurationName].allDependencies.each {
+                        dependencies.each {
                             if (it.group != null && it.name != null) {
-                                println "${configurationName} - adding dependency: ${it.group}:${it.name}:${it.version}"
+                                println "${apiConfigurationName} - adding dependency: ${it.group}:${it.name}:${it.version}"
 
                                 def dependencyNode = dependenciesNode.appendNode('dependency')
                                 dependencyNode.appendNode('groupId', it.group)
