@@ -35,6 +35,10 @@ android {
             dimension "api"
             minSdkVersion 21
         }
+        unified {
+            dimension "api"
+            minSdkVersion 16
+        }
     }
 }
 
