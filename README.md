@@ -1,23 +1,43 @@
 # THEOplayerSDK
 
-THEOplayer is the universal video player solution created by [THEO Technologies](https://www.theoplayer.com/). The THEOplayer Android SDK enables you to quickly deliver content playback on Android, Android TV and Fire TV.
+THEOplayer is the universal video player solution created by [THEO Technologies](https://www.theoplayer.com/).
+The THEOplayer Android SDK enables you to quickly deliver content playback on Android, Android TV and Fire TV.
 
 ## Prerequisites
 
+### THEOplayer *Android* vs. *Unified Android* SDK
+
+The THEOplayer SDK for Android comes in different flavours. One group consists of the separate SDKs for Android (mobile) 
+minApi16 and minApi21, Android TV and Fire TV, which are all variants that differ from one another by how 
+per-platform specifics are handled.
+
+More recently, a new SDK was released that covers all platforms with a single library: the *Unified Android* SDK.
+It supports clear and encrypted playback through (LL-)DASH, (LL-)HLS and HESP on Android, Android TV and FireTV.
+From API perspective, while it does not yet contain all features in comparison to the other SDKs, 
+it aims to be interchangeable.
+
 ### THEOplayer license
-You must have a valid THEOplayer license. Request your license via [https://portal.theoplayer.com](https://portal.theoplayer.com) where you can create a THEOplayer Android SDK, Android TV SDK or Fire TV SDK.
-After creating an Android SDK (or Android TV SDK or Fire TV SDK), you can copy its license string to your clipboard as demonstrated in the screenshot below.
-You must use this license string when setting up THEOplayer.
+
+A valid [THEOplayer license](https://docs.theoplayer.com/how-to-guides/12-license/00-introduction.md)
+is required to use a THEOplayer SDK. 
+It can be requested via [THEOportal](https://portal.theoplayer.com).
+
+With the exclusion of the Unified Android SDK, you can also create a custom THEOplayer Android SDK,
+Android TV SDK or Fire TV SDK in THEOportal.
+After creating the custom SDK, copy its license string to your clipboard as 
+demonstrated in the screenshot below. Use this license string when setting up THEOplayer.
 
 ![](https://cdn.theoplayer.com/images/git/theoplayer-android-sdk-license-string.png)
 
-
 ## Included features
 
-The THEOplayer SDK consists of modular features. This package includes only the basic features: DASH, HLS, LL-HLS, UI, Cache, ExoPlayer.
+The THEOplayer SDK consists of [modular features](https://docs.theoplayer.com/faq/53-theoplayer-features-modules.md).
+All packages include only the basic features. 
+The `unified` package is built with features ```DASH, HLS, LL-HLS```, 
+while ```DASH, HLS, LL-HLS, UI, Cache, ExoPlayer``` applies for all other packages.
 Additional feature sets will be provided in the future.
 
-Alternatively, you can make your own custom build via our [THEOportal](https://portal.theoplayer.com),
+Alternatively, except for `unified`, you can make your own custom build via our [THEOportal](https://portal.theoplayer.com),
 and manually include the THEOplayer SDK.
 
 ## Installation
@@ -41,6 +61,7 @@ implementation 'com.theoplayer.theoplayer-sdk-android:basic-minapi16:+'
 implementation 'com.theoplayer.theoplayer-sdk-android:basic-minapi21:+'
 implementation 'com.theoplayer.theoplayer-sdk-android:basic-androidTV:+'
 implementation 'com.theoplayer.theoplayer-sdk-android:basic-fireTV:+'
+implementation 'com.theoplayer.theoplayer-sdk-android:basic-unified:+'
 ```
 
 If you're targeting Android 5.0 and above, then you should only add the `minapi21` dependency.
@@ -49,6 +70,8 @@ If you're also targeting Android 4.1 and above, you should also add the `minapi1
 If you're targeting Android TV, then you should only add the `androidTV` dependency.
 
 If you're targeting Fire TV, then you should only add the `fireTV` dependency.
+
+The `unified` dependency targets all Android, AndroidTV and Fire TV platforms from Android 4.1 upwards.
 
 Notes:
 
