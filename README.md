@@ -61,7 +61,7 @@ implementation 'com.theoplayer.theoplayer-sdk-android:basic-minapi16:+'
 implementation 'com.theoplayer.theoplayer-sdk-android:basic-minapi21:+'
 implementation 'com.theoplayer.theoplayer-sdk-android:basic-androidTV:+'
 implementation 'com.theoplayer.theoplayer-sdk-android:basic-fireTV:+'
-implementation 'com.theoplayer.theoplayer-sdk-android:basic-unified:+'
+implementation 'com.theoplayer.theoplayer-sdk-android:unified:+'
 ```
 
 If you're targeting Android 5.0 and above, then you should only add the `minapi21` dependency.
