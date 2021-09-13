@@ -70,7 +70,7 @@ publishing {
                     // The reason why the order of the flavors are important in generating the publishing artifacts
                     def bundleFlavor = variant.flavors.name[0]
                     def apiFlavor = variant.flavors.name[1]
-                    artifactId "${bundleFlavor}-${apiFlavor}"
+                    artifactId apiFlavor == "unified" ? apiFlavor : "${bundleFlavor}-${apiFlavor}"
                     artifact("libs/${project.ext.sdkName}-${bundleFlavor}-${project.ext.sdkVersion}-${apiFlavor}-release.aar")
 
                     pom.withXml {
