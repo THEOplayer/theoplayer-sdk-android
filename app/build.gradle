@@ -14,37 +14,71 @@ android {
     }
 
     // Note the order of the flavors are important in generating the publishing artifacts
-    flavorDimensions "bundle", "api"
+    flavorDimensions "api"
     productFlavors {
-        basic {
-            dimension "bundle"
-        }
         minapi16 {
             dimension "api"
             minSdkVersion 16
+            ext {
+                artifactId = "${project.ext.bundleName}-${name}"
+                aarBaseName = name
+            }
         }
         minapi21 {
             dimension "api"
             minSdkVersion 21
+            ext {
+                artifactId = "${project.ext.bundleName}-${name}"
+                aarBaseName = name
+            }
         }
         androidTV {
             dimension "api"
             minSdkVersion 21
+            ext {
+                artifactId = "${project.ext.bundleName}-${name}"
+                aarBaseName = name
+            }
         }
         fireTV {
             dimension "api"
             minSdkVersion 21
+            ext {
+                artifactId = "${project.ext.bundleName}-${name}"
+                aarBaseName = name
+            }
         }
         unified {
             dimension "api"
             minSdkVersion 16
+            ext {
+                artifactId = 'unified'
+                aarBaseName = 'unifiedAndroid'
+            }
+        }
+        unified_ads {
+            dimension "api"
+            minSdkVersion 16
+            ext {
+                artifactId = 'unified-ads'
+                aarBaseName = "unifiedAndroid-ads"
+            }
+        }
+        unified_ads_ima {
+            dimension "api"
+            minSdkVersion 16
+            ext {
+                artifactId = 'unified-ads-ima'
+                aarBaseName = 'unifiedAndroid-ima'
+            }
         }
     }
 }
 
 dependencies {
-    basicImplementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.google.code.gson:gson:2.8.2'
     unifiedImplementation 'com.google.android.gms:play-services-basement:17.6.0'
+    unified_ads_imaImplementation "com.google.ads.interactivemedia.v3:interactivemedia:3.25.1"
 }
 
 task updateProperties() {
@@ -65,24 +99,24 @@ publishing {
         android.variantFilter { variant ->
             if (variant.buildType.name == "release") {
 
-                // Dynamically creating publications name
+                // Dynamically create publications name
                 "${variant.name}"(MavenPublication) {
-                    // The reason why the order of the flavors are important in generating the publishing artifacts
-                    def bundleFlavor = variant.flavors.name[0]
-                    def apiFlavor = variant.flavors.name[1]
-                    artifactId apiFlavor == "unified" ? apiFlavor : "${bundleFlavor}-${apiFlavor}"
-                    artifact("libs/${project.ext.sdkName}-${bundleFlavor}-${project.ext.sdkVersion}-${apiFlavor}-release.aar")
+                    def apiFlavor = variant.flavors.name[0]
+                    def aarBaseName = variant.flavors.ext.aarBaseName[0]
+                    def aarName = "${project.ext.sdkName}-${project.ext.bundleName}-${project.ext.sdkVersion}-${aarBaseName}-release.aar"
+
+                    artifactId variant.flavors.ext.artifactId[0]
+                    artifact("libs/${aarName}")
 
                     pom.withXml {
-                        def bundleConfigurationName = "${bundleFlavor}Implementation"
                         def apiConfigurationName = "${apiFlavor}Implementation"
-                        def dependencies = configurations[bundleConfigurationName].allDependencies +
-                                configurations[apiConfigurationName].allDependencies;
+                        def dependencies = configurations["implementation"].allDependencies +
+                                configurations[apiConfigurationName].allDependencies
 
-                        //Creating additional node for dependencies
+                        // Create additional node for dependencies
                         def dependenciesNode = asNode().appendNode('dependencies')
 
-                        //Iterate over the {configurationName} dependencies, adding a <dependency> node for each
+                        // Iterate over the {configurationName} dependencies, adding a <dependency> node for each
                         dependencies.each {
                             if (it.group != null && it.name != null) {
                                 println "${apiConfigurationName} - adding dependency: ${it.group}:${it.name}:${it.version}"
@@ -92,7 +126,7 @@ publishing {
                                 dependencyNode.appendNode('artifactId', it.name)
                                 dependencyNode.appendNode('version', it.version)
 
-                                //If there are any exclusions in dependency
+                                // If there are any exclusions in dependency
                                 if (it.excludeRules.size() > 0) {
                                     def exclusionsNode = dependencyNode.appendNode('exclusions')
                                     it.excludeRules.each { rule ->
