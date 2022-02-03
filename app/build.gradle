@@ -56,7 +56,7 @@ android {
                 aarBaseName = 'unifiedAndroid'
             }
         }
-        unified_ads {
+        unifiedAds {
             dimension "api"
             minSdkVersion 16
             ext {
@@ -64,7 +64,7 @@ android {
                 aarBaseName = "unifiedAndroid-ads"
             }
         }
-        unified_ads_ima {
+        unifiedAdsIma {
             dimension "api"
             minSdkVersion 16
             ext {
@@ -78,7 +78,7 @@ android {
 dependencies {
     implementation 'com.google.code.gson:gson:2.8.2'
     unifiedImplementation 'com.google.android.gms:play-services-basement:17.6.0'
-    unified_ads_imaImplementation "com.google.ads.interactivemedia.v3:interactivemedia:3.25.1"
+    unifiedAdsImaImplementation "com.google.ads.interactivemedia.v3:interactivemedia:3.25.1"
 }
 
 task updateProperties() {
