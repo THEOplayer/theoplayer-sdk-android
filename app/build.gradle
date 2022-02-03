@@ -79,6 +79,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.2'
     unifiedImplementation 'com.google.android.gms:play-services-basement:17.6.0'
     unifiedAdsImaImplementation "com.google.ads.interactivemedia.v3:interactivemedia:3.25.1"
+    unifiedAdsImaImplementation "com.theoplayer.theoplayer-sdk-android:unified-ads:${project.ext.sdkVersion}"
 }
 
 task updateProperties() {
