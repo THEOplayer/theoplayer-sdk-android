@@ -31,6 +31,8 @@ demonstrated in the screenshot below. Use this license string when setting up TH
 
 ## Included features
 
+#### Default packages
+
 The THEOplayer SDK consists of [modular features](https://docs.theoplayer.com/faq/53-theoplayer-features-modules.md).
 All packages include only the basic features. 
 The `unified` package is built with features ```DASH, HLS, LL-HLS```, 
@@ -39,6 +41,10 @@ Additional feature sets will be provided in the future.
 
 Alternatively, except for `unified`, you can make your own custom build via our [THEOportal](https://portal.theoplayer.com),
 and manually include the THEOplayer SDK.
+
+#### Customize unified package
+
+To customize your build of the `unified` package, you can add additional dependencies. For example, if you would like to add Google IMA advertisements to your player you can add the `unified-ads-ima:+` dependency. Additional feature dependencies will be added in the future and listed here.
 
 ## Installation
 
