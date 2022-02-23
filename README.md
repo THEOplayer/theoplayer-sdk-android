@@ -79,6 +79,7 @@ Notes:
 * Android Studio will recommend replacing the `+` with the exact version of THEOplayer.
 * Versions earlier than 2.83.0 (release 2021.1.3) are not available on the public Jitpack registry.
 Earlier versions are available through our [THEOportal](https://portal.theoplayer.com).
+* Additional features, like Google IMA advertisements, can be added in the exact same way as shown above. For a concrete example refer to the [how-to guide for Google IMA](https://docs.theoplayer.com/how-to-guides/01-ads/10-google-ima.md#add-the-unified-ads-ima-dependency).
 
 ## Usage
 
