@@ -72,6 +72,14 @@ android {
                 aarBaseName = 'unifiedAndroid-ima'
             }
         }
+        unifiedCast {
+            dimension "api"
+            minSdkVersion 16
+            ext {
+                artifactId = 'unified-cast'
+                aarBaseName = 'unifiedAndroid-cast'
+            }
+        }
     }
 }
 
@@ -80,6 +88,8 @@ dependencies {
     unifiedImplementation 'com.google.android.gms:play-services-basement:17.6.0'
     unifiedAdsImaImplementation "com.google.ads.interactivemedia.v3:interactivemedia:3.25.1"
     unifiedAdsImaImplementation "com.theoplayer.theoplayer-sdk-android:unified-ads:${project.ext.sdkVersion}"
+    unifiedCastImplementation "com.google.android.gms:play-services-cast-framework:21.0.1"
+    unifiedCastImplementation "androidx.mediarouter:mediarouter:1.2.6"
 }
 
 task updateProperties() {
