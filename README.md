@@ -44,7 +44,12 @@ and manually include the THEOplayer SDK.
 
 #### Customize unified package
 
-To customize your build of the `unified` package, you can add additional dependencies. For example, if you would like to add Google IMA advertisements to your player you can add the `unified-ads-ima:+` dependency. Additional feature dependencies will be added in the future and listed here.
+To customize your build of the `unified` package, you can add additional dependencies. For example, if you would like to add Google IMA advertisements to your player you can add the `unified-ads-ima:+` dependency. Below you can find a list containing all currently available dependencies. Additional feature dependencies will be added in the future.
+
+| Feature        |    Dependency           | Release  | Documentation  |
+| :-------------  |:--------------------| :--------:| :--------:|
+| Google IMA     | `unified-ads-ima:+`  | 3.1.0    | [documentation](https://docs.theoplayer.com/how-to-guides/01-ads/10-google-ima.md/#unified-android-sdk) |
+| Chromecast     | `unified-cast:+`     | 3.4.0    | [documentation](https://docs.theoplayer.com/how-to-guides/03-cast/01-chromecast/00-introduction.md#theoplayer-unified-android-sdk) ||
 
 ## Installation
 
