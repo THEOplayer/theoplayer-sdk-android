@@ -72,6 +72,14 @@ android {
                 aarBaseName = 'unifiedAndroid-ima'
             }
         }
+        unifiedAdsMediatailor {
+            dimension "api"
+            minSdkVersion 21
+            ext {
+                artifactId = 'unified-ads-mediatailor'
+                aarBaseName = 'unifiedAndroid-mediatailor'
+            }
+        }
         unifiedCast {
             dimension "api"
             minSdkVersion 16
