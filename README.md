@@ -51,6 +51,7 @@ To customize your build of the `unified` package, you can add additional depende
 | Google IMA      | `unified-ads-ima:+`          | 3.1.0    | [documentation](https://docs.theoplayer.com/how-to-guides/01-ads/10-google-ima.md/#unified-android-sdk) |
 | Chromecast      | `unified-cast:+`             | 3.4.0    | [documentation](https://docs.theoplayer.com/how-to-guides/03-cast/01-chromecast/00-introduction.md#theoplayer-unified-android-sdk) |
 | AWS MediaTailor | `unified-ads-mediatailor:+`  | 4.0.0    | [documentation](https://docs.theoplayer.com/how-to-guides/05-integrations/05-mediatailor.md/#unified-android-sdk) |
+| Google DAI      | `unified-ads-dai:+`         |  4.3.0  |         [documentation](https://docs.theoplayer.com/how-to-guides/01-ads/08-google-dai.md#theoplayer-unified-android-sdk)          |
 
 ## Installation
 
