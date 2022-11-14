@@ -72,6 +72,14 @@ android {
                 aarBaseName = 'unifiedAndroid-ima'
             }
         }
+        unifiedAdsDai {
+            dimension "api"
+            minSdkVersion 21
+            ext {
+                artifactId = 'unified-ads-dai'
+                aarBaseName = 'unifiedAndroid-dai'
+            }
+        }
         unifiedAdsMediatailor {
             dimension "api"
             minSdkVersion 21
@@ -96,6 +104,7 @@ dependencies {
     unifiedImplementation 'com.google.android.gms:play-services-basement:17.6.0'
     unifiedAdsImaImplementation "com.google.ads.interactivemedia.v3:interactivemedia:3.25.1"
     unifiedAdsImaImplementation "com.theoplayer.theoplayer-sdk-android:unified-ads:${project.ext.sdkVersion}"
+    unifiedAdsDaiImplementation "com.theoplayer.theoplayer-sdk-android:unified-ads-ima:${project.ext.sdkVersion}"
     unifiedCastImplementation "com.google.android.gms:play-services-cast-framework:21.0.1"
     unifiedCastImplementation "androidx.mediarouter:mediarouter:1.2.6"
 }
