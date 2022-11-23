@@ -105,8 +105,10 @@ dependencies {
     unifiedAdsImaImplementation "com.google.ads.interactivemedia.v3:interactivemedia:3.25.1"
     unifiedAdsImaImplementation "com.theoplayer.theoplayer-sdk-android:unified-ads:${project.ext.sdkVersion}"
     unifiedAdsDaiImplementation "com.theoplayer.theoplayer-sdk-android:unified-ads-ima:${project.ext.sdkVersion}"
+    unifiedAdsDaiImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9"
     unifiedCastImplementation "com.google.android.gms:play-services-cast-framework:21.0.1"
     unifiedCastImplementation "androidx.mediarouter:mediarouter:1.2.6"
+    unifiedAdsMediatailorImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9"
 }
 
 task updateProperties() {
