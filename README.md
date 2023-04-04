@@ -1,20 +1,10 @@
-# THEOplayerSDK
+# THEOplayer Android SDK
 
 THEOplayer is the universal video player solution created by [THEO Technologies](https://www.theoplayer.com/).
-The THEOplayer Android SDK enables you to quickly deliver content playback on Android, Android TV and Fire TV.
+And the THEOplayer Android SDK enables you to quickly deliver content playback on Android, Android TV and Fire TV.
+The Android SDK leverages Java 8 and Kotlin languages to provide safer and more concise code.
 
 ## Prerequisites
-
-### THEOplayer *Android* vs. *Unified Android* SDK
-
-The THEOplayer SDK for Android comes in different flavours. One group consists of the separate SDKs for Android (mobile) 
-minApi16 and minApi21, Android TV and Fire TV, which are all variants that differ from one another by how 
-per-platform specifics are handled.
-
-More recently, a new SDK was released that covers all platforms with a single library: the *Unified Android* SDK.
-It supports clear and encrypted playback through (LL-)DASH, (LL-)HLS and HESP on Android, Android TV and FireTV.
-From API perspective, while it does not yet contain all features in comparison to the other SDKs, 
-it aims to be interchangeable.
 
 ### THEOplayer license
 
@@ -22,10 +12,8 @@ A valid [THEOplayer license](https://docs.theoplayer.com/how-to-guides/12-licens
 is required to use a THEOplayer SDK. 
 It can be requested via [THEOportal](https://portal.theoplayer.com).
 
-With the exclusion of the Unified Android SDK, you can also create a custom THEOplayer Android SDK,
-Android TV SDK or Fire TV SDK in THEOportal.
-After creating the custom SDK, copy its license string to your clipboard as 
-demonstrated in the screenshot below. Use this license string when setting up THEOplayer.
+After creating the THEOplayer license, copy its license string to your clipboard as demonstrated in the screenshot below.
+Use this license string when setting up THEOplayer.
 
 ![](https://cdn.theoplayer.com/images/git/theoplayer-android-sdk-license-string.png)
 
@@ -34,24 +22,22 @@ demonstrated in the screenshot below. Use this license string when setting up TH
 #### Default packages
 
 The THEOplayer SDK consists of [modular features](https://docs.theoplayer.com/faq/53-theoplayer-features-modules.md).
-All packages include only the basic features. 
-The `unified` package is built with features ```DASH, HLS, LL-HLS```, 
-while ```DASH, HLS, LL-HLS, UI, Cache, ExoPlayer``` applies for all other packages.
-Additional feature sets will be provided in the future.
+The `core` package is responsible for playback of ```DASH, HLS, LL-HLS``` sources.
+Additional features are provided as separate packages.
 
-Alternatively, except for `unified`, you can make your own custom build via our [THEOportal](https://portal.theoplayer.com),
-and manually include the THEOplayer SDK.
+#### Integration packages
 
-#### Customize unified package
+To customize your build of the `core` package, you can add additional dependencies.
+For example, if you would like to add Google IMA advertisements to your player you can add the `integration-ads-ima:+` dependency.
+Below you can find a list containing all currently available dependencies.
+Additional feature dependencies will be added in the future.
 
-To customize your build of the `unified` package, you can add additional dependencies. For example, if you would like to add Google IMA advertisements to your player you can add the `unified-ads-ima:+` dependency. Below you can find a list containing all currently available dependencies. Additional feature dependencies will be added in the future.
-
-| Feature        |    Dependency           | Release  | Documentation  |
-| :-------------  |:--------------------| :--------:| :--------:|
-| Google IMA      | `unified-ads-ima:+`          | 3.1.0    | [documentation](https://docs.theoplayer.com/how-to-guides/01-ads/10-google-ima.md/#unified-android-sdk) |
-| Chromecast      | `unified-cast:+`             | 3.4.0    | [documentation](https://docs.theoplayer.com/how-to-guides/03-cast/01-chromecast/00-introduction.md#theoplayer-unified-android-sdk) |
-| AWS MediaTailor | `unified-ads-mediatailor:+`  | 4.0.0    | [documentation](https://docs.theoplayer.com/how-to-guides/05-integrations/05-mediatailor.md/#unified-android-sdk) |
-| Google DAI      | `unified-ads-dai:+`         |  4.3.0  |         [documentation](https://docs.theoplayer.com/how-to-guides/01-ads/08-google-dai.md#theoplayer-unified-android-sdk)          |
+| Features        | Dependency                      | Release |                                                       Documentation                                                        |
+|:----------------|:--------------------------------|:-------:|:--------------------------------------------------------------------------------------------------------------------------:|
+| Google IMA      | `integration-ads-ima:+`         | 3.1.0+  |              [documentation](https://docs.theoplayer.com/how-to-guides/01-ads/10-google-ima.md/#android-sdk)               |
+| Chromecast      | `integration-cast:+`            | 3.4.0+  | [documentation](https://docs.theoplayer.com/how-to-guides/03-cast/01-chromecast/00-introduction.md#theoplayer-android-sdk) |
+| AWS MediaTailor | `integration-ads-mediatailor:+` | 4.0.0+  |              [documentation](https://docs.theoplayer.com/how-to-guides/01-ads/12-mediatailor.md/#android-sdk)              |
+| Google DAI      | `integration-ads-dai:+`         | 4.3.0+  |               [documentation](https://docs.theoplayer.com/how-to-guides/01-ads/08-google-dai.md#android-sdk)               |
 
 ## Installation
 
@@ -70,21 +56,12 @@ allprojects {
 In your **module** level `build.gradle` file add one or more THEOplayer dependencies:
 
 ```
-implementation 'com.theoplayer.theoplayer-sdk-android:basic-minapi16:+'
-implementation 'com.theoplayer.theoplayer-sdk-android:basic-minapi21:+'
-implementation 'com.theoplayer.theoplayer-sdk-android:basic-androidTV:+'
-implementation 'com.theoplayer.theoplayer-sdk-android:basic-fireTV:+'
-implementation 'com.theoplayer.theoplayer-sdk-android:unified:+'
+implementation 'com.theoplayer.theoplayer-sdk-android:core:+' // Always required
+implementation 'com.theoplayer.theoplayer-sdk-android:integration-ads-ima:+'
+implementation 'com.theoplayer.theoplayer-sdk-android:integration-cast:+'
+implementation 'com.theoplayer.theoplayer-sdk-android:integration-ads-mediatailor:+'
+implementation 'com.theoplayer.theoplayer-sdk-android:integration-ads-dai:+'
 ```
-
-If you're targeting Android 5.0 and above, then you should only add the `minapi21` dependency.
-If you're also targeting Android 4.1 and above, you should also add the `minapi16` dependency, and you'll find the article at [https://docs.theoplayer.com/getting-started/01-sdks/02-android/02-android-sdk-product-flavors.md](https://docs.theoplayer.com/getting-started/01-sdks/02-android/02-android-sdk-product-flavors.md) to be interesting.
-
-If you're targeting Android TV, then you should only add the `androidTV` dependency.
-
-If you're targeting Fire TV, then you should only add the `fireTV` dependency.
-
-The `unified` dependency targets all Android, AndroidTV and Fire TV platforms from Android 4.1 upwards.
 
 Notes:
 
@@ -138,7 +115,6 @@ In this `THEOplayerConfig`, you must configure your license string, as demonstra
 
 ```java
 THEOplayerConfig playerConfig = new THEOplayerConfig.Builder()
-    .chromeless(false)
     .license("your_license_here")
     .build();
 THEOplayerView theoPlayerView = new THEOplayerView(this, playerConfig);
