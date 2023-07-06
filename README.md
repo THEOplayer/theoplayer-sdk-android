@@ -67,6 +67,8 @@ Notes:
 
 * The `+` will fetch the latest released version of THEOplayer SDK.
 * Android Studio will recommend replacing the `+` with the exact version of THEOplayer.
+* Versions earlier than 5.0.0 (release 2023.3.0) are available under different module names.
+For more information about them check our [legacy branch](https://github.com/THEOplayer/theoplayer-sdk-android/tree/legacy).
 * Versions earlier than 2.83.0 (release 2021.1.3) are not available on the public Jitpack registry.
 Earlier versions are available through our [THEOportal](https://portal.theoplayer.com).
 
