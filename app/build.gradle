@@ -2,13 +2,14 @@ apply plugin: 'com.android.application'
 apply plugin: 'maven-publish'
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.3"
+    namespace = "com.theoplayer.android"
+    compileSdkVersion projectCompileSdkVersion
+    buildToolsVersion buildToolsVersion
 
     defaultConfig {
         applicationId project.ext.groupId
         minSdkVersion 21
-        targetSdkVersion 30
+        targetSdkVersion projectCompileSdkVersion
         versionCode 1
         versionName "1.0"
     }
@@ -16,30 +17,6 @@ android {
     // Note the order of the flavors are important in generating the publishing artifacts
     flavorDimensions "module"
     productFlavors {
-//        minapi21 {
-//            dimension "api"
-//            minSdkVersion 21
-//            ext {
-//                artifactId = "${project.ext.bundleName}-${name}"
-//                aarBaseName = name
-//            }
-//        }
-//        androidTV {
-//            dimension "api"
-//            minSdkVersion 21
-//            ext {
-//                artifactId = "${project.ext.bundleName}-${name}"
-//                aarBaseName = name
-//            }
-//        }
-//        fireTV {
-//            dimension "api"
-//            minSdkVersion 21
-//            ext {
-//                artifactId = "${project.ext.bundleName}-${name}"
-//                aarBaseName = name
-//            }
-//        }
          core {
             dimension "module"
             ext {
@@ -86,15 +63,15 @@ android {
 }
 
 dependencies {
-    implementation 'com.google.code.gson:gson:2.8.2'
-    coreImplementation 'com.google.android.gms:play-services-basement:17.6.0'
-    imaImplementation "com.google.ads.interactivemedia.v3:interactivemedia:3.25.1"
+    implementation "com.google.code.gson:gson:${gsonVersion}"
+    coreImplementation "com.google.android.gms:play-services-basement:${playServicesVersion}"
+    imaImplementation "com.google.ads.interactivemedia.v3:interactivemedia:${googleImaVersion}"
     imaImplementation "com.theoplayer.theoplayer-sdk-android:integration-ads:${project.ext.sdkVersion}"
     daiImplementation "com.theoplayer.theoplayer-sdk-android:integration-ads-ima:${project.ext.sdkVersion}"
-    daiImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9"
-    castImplementation "com.google.android.gms:play-services-cast-framework:21.0.1"
-    castImplementation "androidx.mediarouter:mediarouter:1.2.6"
-    mediatailorImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9"
+    daiImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutinesVersion}"
+    castImplementation "com.google.android.gms:play-services-cast-framework:${castFrameworkVersion}"
+    castImplementation "androidx.mediarouter:mediarouter:${mediaRouterVersion}"
+    mediatailorImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutinesVersion}"
 }
 
 task updateProperties() {
