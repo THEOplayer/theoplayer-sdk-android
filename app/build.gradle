@@ -3,8 +3,8 @@ apply plugin: 'maven-publish'
 
 android {
     namespace = "com.theoplayer.android"
-    compileSdkVersion projectCompileSdkVersion
-    buildToolsVersion buildToolsVersion
+    compileSdkVersion = projectCompileSdkVersion
+    buildToolsVersion = buildToolsVersion
 
     defaultConfig {
         applicationId project.ext.groupId
@@ -15,7 +15,7 @@ android {
     }
 
     // Note the order of the flavors are important in generating the publishing artifacts
-    flavorDimensions "module"
+    flavorDimensions = ["module"]
     productFlavors {
          core {
             dimension "module"
