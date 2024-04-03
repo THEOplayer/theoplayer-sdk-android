@@ -3,10 +3,10 @@ ext {
     projectCompileSdkVersion = 34
 
     buildToolsVersion = '34.0.0'
-    coroutinesVersion = '1.3.9'
+    coroutinesVersion = '1.7.3'
     playServicesVersion = '17.6.0'
-    gsonVersion = '2.8.2'
-    castFrameworkVersion = '21.3.0'
-    mediaRouterVersion = '1.2.6'
-    googleImaVersion = '3.31.0'
+    gsonVersion = '2.10.1'
+    castFrameworkVersion = '21.4.0'
+    mediaRouterVersion = '1.7.0'
+    googleImaVersion = '3.32.0'
 }
