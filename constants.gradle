@@ -8,5 +8,5 @@ ext {
     gsonVersion = '2.10.1'
     castFrameworkVersion = '21.4.0'
     mediaRouterVersion = '1.7.0'
-    googleImaVersion = '3.32.0'
+    googleImaVersion = '3.33.0'
 }
